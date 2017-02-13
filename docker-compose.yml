@@ -2,13 +2,15 @@ version: '2'
 
 services:
   api:
-    build: api/
+    build: 
+      context: .
+      dockerfile: ./api/Dockerfile
     volumes:
-      - './api/:/usr/local/opt/apps'
+      - './api/src:/usr/local/opt/apps/api'
     environment:
       VIRTUAL_HOST: 'vanels.dev'
-    #command: php -S 0.0.0.0:80 -t public/ public/index.php
-    command: tail -f /dev/null
+    command: php -S 0.0.0.0:80 -t api/public/ api/public/index.php
+    #command: tail -f /dev/null
   lb:
     image: 'dockercloud/haproxy:1.5.3'
     links:
@@ -20,7 +22,7 @@ services:
       MONITOR_URI: '/status'
     ports:
       - '1936:1936'
-      - '8080:80'
+      - '80:80'
     depends_on:
       - api
     volumes:
