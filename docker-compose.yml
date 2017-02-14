@@ -5,12 +5,11 @@ services:
     build: 
       context: .
       dockerfile: ./api/Dockerfile
-    volumes:
-      - './api/src:/usr/local/opt/apps/api'
+    #volumes:
+    #  - './api/src:/usr/local/opt/apps/api'
     environment:
-      VIRTUAL_HOST: 'vanels.dev'
-    command: php -S 0.0.0.0:80 -t api/public/ api/public/index.php
-    #command: tail -f /dev/null
+      VIRTUAL_HOST: 'vanels.devlusaja.com'
+    command: php -S 0.0.0.0:80 -t api/public api/public/index.php
   lb:
     image: 'dockercloud/haproxy:1.5.3'
     links:

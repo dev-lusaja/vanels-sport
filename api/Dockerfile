@@ -17,4 +17,6 @@ RUN apt-get update && apt-get install -y git
 RUN composer require slim/slim "^3.0"
 RUN composer require slim/twig-view "^2.1"
 
+COPY api/src/ /usr/local/opt/apps/api
+
 EXPOSE 80
